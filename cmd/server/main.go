@@ -32,6 +32,7 @@ func main() {
 	dbCtx, dbCancel := context.WithTimeout(context.Background(), dbConnectTimeout)
 	defer dbCancel()
 
+	// postgres://postgres:test@localhost:5432/postgres?pool_max_conns=50&pool_min_conns=2
 	pool, err := pgxpool.New(dbCtx, os.Getenv("DATABASE_URL"))
 	if err != nil {
 		log.Error("unable to initialize db pool connection", "err", err)
